@@ -6,7 +6,7 @@ import MainLayout from 'layout/MainLayout';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
-
+const TestDashboardDefault = Loadable(lazy(() => import('pages/dashboard/test_dashboard')));
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 
@@ -40,8 +40,8 @@ const MainRoutes = {
             ]
         },
         {
-            path: 'sample-page',
-            element: <SamplePage />
+            path: 'test-dashboard',
+            element: <TestDashboardDefault />
         },
         {
             path: 'shadow',

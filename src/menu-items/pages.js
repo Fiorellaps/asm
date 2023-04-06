@@ -10,23 +10,31 @@ const icons = {
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
 
 const pages = {
-    id: 'authentication',
-    title: 'Authentication',
+    id: 'administracion',
+    title: 'Administración',
     type: 'group',
     children: [
         {
-            id: 'login1',
-            title: 'Login',
+            id: 'tags',
+            title: 'Añadir tags',
             type: 'item',
-            url: '/login',
+            url: '/',
             icon: icons.LoginOutlined,
             target: true
         },
         {
-            id: 'register1',
-            title: 'Register',
+            id: 'entornos',
+            title: 'Añadir Entornos',
             type: 'item',
-            url: '/register',
+            url: '/',
+            icon: icons.ProfileOutlined,
+            target: true
+        },
+        {
+            id: 'test',
+            title: 'Añadir Tests',
+            type: 'item',
+            url: '/',
             icon: icons.ProfileOutlined,
             target: true
         }

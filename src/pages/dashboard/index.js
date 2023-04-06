@@ -1,25 +1,15 @@
-import { useState } from 'react';
-
+import { useState, Fragment } from 'react';
+import { useNavigate } from 'react-router-dom';
 // material-ui
-import {
-    Avatar,
-    AvatarGroup,
-    Box,
-    Button,
-    Grid,
-    List,
-    ListItemAvatar,
-    ListItemButton,
-    ListItemSecondaryAction,
-    ListItemText,
-    MenuItem,
-    Stack,
-    TextField,
-    Typography
-} from '@mui/material';
+import { Avatar, Box, Card, CardHeader, IconButton, Collapse, CardContent, InputAdornment, OutlinedInput } from '@mui/material';
 
-// project import
-import OrdersTable from './OrdersTable';
+// assets
+import { SearchOutlined } from '@ant-design/icons';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'; // project import
+
+// render - dashboard
+/*import OrdersTable from './OrdersTable';
 import IncomeAreaChart from './IncomeAreaChart';
 import MonthlyBarChart from './MonthlyBarChart';
 import ReportAreaChart from './ReportAreaChart';
@@ -32,7 +22,8 @@ import { GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icon
 import avatar1 from 'assets/images/users/avatar-1.png';
 import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
-import avatar4 from 'assets/images/users/avatar-4.png';
+import avatar4 from 'assets/images/users/avatar-4.png';*/
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 // avatar style
 const avatarSX = {
@@ -42,7 +33,7 @@ const avatarSX = {
 };
 
 // action style
-const actionSX = {
+/*const actionSX = {
     mt: 0.75,
     ml: 1,
     top: 'auto',
@@ -65,282 +56,201 @@ const status = [
         value: 'year',
         label: 'This Year'
     }
-];
+];*/
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const DashboardDefault = () => {
-    const [value, setValue] = useState('today');
-    const [slot, setSlot] = useState('week');
+    /*const [value, setValue] = useState('today');
+    const [slot, setSlot] = useState('week');*/
+    const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'nombreTest', headerName: 'Test', width: 600 },
+        { field: 'estado', headerName: 'Estado', /* sortable: false,*/ width: 70 },
+        {
+            field: 'fechaUltimaEjecucion',
+            headerName: 'Última Ejecución',
+            //type: 'date',
+            width: 170
+        },
+        { field: 'diponibilidadHora', headerName: 'Hora', width: 70 },
+        { field: 'diponibilidadDia', headerName: 'Día', width: 70 },
+        { field: 'diponibilidadMes', headerName: 'Mes', width: 70 },
+        {
+            field: 'duracionUltimaEjecucion',
+            headerName: 'Duración',
+            type: 'number',
+            width: 70
+        }
+    ];
 
+    const rows = [
+        {
+            id: '99200',
+            nombreTest: 'LANPROVA_OPTIMIZADO_BETA_HBLO-26_Extracte_Targeta_Firefox',
+            diponibilidadHora: '75%',
+            diponibilidadDia: '74.19%',
+            diponibilidadMes: '74.19%',
+            fechaCalculo: '2023-03-05 05:36:00',
+            estado: 0,
+            fechaUltimaEjecucion: '2023-03-05 05:35:42',
+            duracionUltimaEjecucion: '5.36'
+        },
+        {
+            id: '99172',
+            nombreTest: 'LANPROVA_OPTIMIZADO_BETA_HBLO-12_Empreses_Norma_43_Firefox',
+            diponibilidadHora: '0%',
+            diponibilidadDia: '82.98%',
+            diponibilidadMes: '82.98%',
+            fechaCalculo: '2023-03-05 05:36:00',
+            estado: 1,
+            fechaUltimaEjecucion: '2023-03-05 05:38:10',
+            duracionUltimaEjecucion: '6.14'
+        },
+        {
+            id: '99185',
+            nombreTest: 'LANPROVA_OPTIMIZADO_BETA_HBLO-17_Particulars_Cartera_de_valors_Firefox',
+            diponibilidadHora: '0%',
+            diponibilidadDia: '80.43%',
+            diponibilidadMes: '80.43%',
+            fechaCalculo: '2023-03-05 05:36:00',
+            estado: 1,
+            fechaUltimaEjecucion: '2023-03-05 03:12:07',
+            duracionUltimaEjecucion: '7.24'
+        },
+        {
+            id: '99181',
+            nombreTest: 'LANPROVA_OPTIMIZADO_BETA_HBLO-16_Particulars_Ordre_transferencia_Chrome',
+            diponibilidadHora: '100%',
+            diponibilidadDia: '98.79%',
+            diponibilidadMes: '98.79%',
+            fechaCalculo: '2023-03-05 05:36:00',
+            estado: 0,
+            fechaUltimaEjecucion: '2023-03-05 05:34:58',
+            duracionUltimaEjecucion: '19.76'
+        },
+        {
+            id: '99163',
+            nombreTest: 'LANPROVA_OPTIMIZADO_BETA_HBLO-05_Transferencies_Firefox',
+            diponibilidadHora: '0%',
+            diponibilidadDia: '99.4%',
+            diponibilidadMes: '99.4%',
+            fechaCalculo: '2023-03-05 05:36:00',
+            estado: 0,
+            fechaUltimaEjecucion: '2023-03-05 05:40:47',
+            duracionUltimaEjecucion: '18.66'
+        },
+        {
+            id: '99182',
+            nombreTest: 'LANPROVA_OPTIMIZADO_BETA_HBLO-16_Particulars_Ordre_transferencia_Firefox',
+            diponibilidadHora: '100%',
+            diponibilidadDia: '100%',
+            diponibilidadMes: '100%',
+            fechaCalculo: '2023-03-05 05:36:00',
+            estado: 0,
+            fechaUltimaEjecucion: '2023-03-05 05:28:41',
+            duracionUltimaEjecucion: '12.69'
+        },
+        {
+            id: '99287',
+            nombreTest: 'LANPROVA_OPTIMIZADO_BETA_HBLO-22_Recibox_Firefox',
+            diponibilidadHora: '0%',
+            diponibilidadDia: '75%',
+            diponibilidadMes: '75%',
+            fechaCalculo: '2023-03-05 05:36:00',
+            estado: 1,
+            fechaUltimaEjecucion: '2023-03-05 03:18:50',
+            duracionUltimaEjecucion: '5.11'
+        },
+        {
+            id: '99395',
+            nombreTest: 'LANPROVA_OPTIMIZADO_BETA_HBLO-32_BKGE4_RCCBOX_Firefox',
+            diponibilidadHora: '0%',
+            diponibilidadDia: '75%',
+            diponibilidadMes: '75%',
+            fechaCalculo: '2023-03-05 05:36:00',
+            estado: 0,
+            fechaUltimaEjecucion: '2023-03-05 04:02:55',
+            duracionUltimaEjecucion: '8.8'
+        },
+        {
+            id: '99391',
+            nombreTest: 'LANPROVA_OPTIMIZADO_BETA_HBLO-31_BKGE3_LOMUTF_Firefox',
+            diponibilidadHora: '75%',
+            diponibilidadDia: '76.32%',
+            diponibilidadMes: '76.32%',
+            fechaCalculo: '2023-03-05 05:36:00',
+            estado: 1,
+            fechaUltimaEjecucion: '2023-03-05 05:30:39',
+            duracionUltimaEjecucion: '4.57'
+        }
+    ];
     return (
-        <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-            {/* row 1 */}
-            <Grid item xs={12} sx={{ mb: -2.25 }}>
-                <Typography variant="h5">Dashboard</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Page Views" count="4,42,236" percentage={59.3} extra="35,000" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Users" count="78,250" percentage={70.5} extra="8,900" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Order" count="18,800" percentage={27.4} isLoss color="warning" extra="1,943" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />
-            </Grid>
-
-            <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
-
-            {/* row 2 */}
-            <Grid item xs={12} md={7} lg={8}>
-                <Grid container alignItems="center" justifyContent="space-between">
-                    <Grid item>
-                        <Typography variant="h5">Unique Visitor</Typography>
-                    </Grid>
-                    <Grid item>
-                        <Stack direction="row" alignItems="center" spacing={0}>
-                            <Button
-                                size="small"
-                                onClick={() => setSlot('month')}
-                                color={slot === 'month' ? 'primary' : 'secondary'}
-                                variant={slot === 'month' ? 'outlined' : 'text'}
-                            >
-                                Month
-                            </Button>
-                            <Button
-                                size="small"
-                                onClick={() => setSlot('week')}
-                                color={slot === 'week' ? 'primary' : 'secondary'}
-                                variant={slot === 'week' ? 'outlined' : 'text'}
-                            >
-                                Week
-                            </Button>
-                        </Stack>
-                    </Grid>
-                </Grid>
-                <MainCard content={false} sx={{ mt: 1.5 }}>
-                    <Box sx={{ pt: 1, pr: 2 }}>
-                        <IncomeAreaChart slot={slot} />
-                    </Box>
-                </MainCard>
-            </Grid>
-            <Grid item xs={12} md={5} lg={4}>
-                <Grid container alignItems="center" justifyContent="space-between">
-                    <Grid item>
-                        <Typography variant="h5">Income Overview</Typography>
-                    </Grid>
-                    <Grid item />
-                </Grid>
-                <MainCard sx={{ mt: 2 }} content={false}>
-                    <Box sx={{ p: 3, pb: 0 }}>
-                        <Stack spacing={2}>
-                            <Typography variant="h6" color="textSecondary">
-                                This Week Statistics
-                            </Typography>
-                            <Typography variant="h3">$7,650</Typography>
-                        </Stack>
-                    </Box>
-                    <MonthlyBarChart />
-                </MainCard>
-            </Grid>
-
-            {/* row 3 */}
-            <Grid item xs={12} md={7} lg={8}>
-                <Grid container alignItems="center" justifyContent="space-between">
-                    <Grid item>
-                        <Typography variant="h5">Recent Orders</Typography>
-                    </Grid>
-                    <Grid item />
-                </Grid>
-                <MainCard sx={{ mt: 2 }} content={false}>
-                    <OrdersTable />
-                </MainCard>
-            </Grid>
-            <Grid item xs={12} md={5} lg={4}>
-                <Grid container alignItems="center" justifyContent="space-between">
-                    <Grid item>
-                        <Typography variant="h5">Analytics Report</Typography>
-                    </Grid>
-                    <Grid item />
-                </Grid>
-                <MainCard sx={{ mt: 2 }} content={false}>
-                    <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
-                        <ListItemButton divider>
-                            <ListItemText primary="Company Finance Growth" />
-                            <Typography variant="h5">+45.14%</Typography>
-                        </ListItemButton>
-                        <ListItemButton divider>
-                            <ListItemText primary="Company Expenses Ratio" />
-                            <Typography variant="h5">0.58%</Typography>
-                        </ListItemButton>
-                        <ListItemButton>
-                            <ListItemText primary="Business Risk Cases" />
-                            <Typography variant="h5">Low</Typography>
-                        </ListItemButton>
-                    </List>
-                    <ReportAreaChart />
-                </MainCard>
-            </Grid>
-
-            {/* row 4 */}
-            <Grid item xs={12} md={7} lg={8}>
-                <Grid container alignItems="center" justifyContent="space-between">
-                    <Grid item>
-                        <Typography variant="h5">Sales Report</Typography>
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            id="standard-select-currency"
-                            size="small"
-                            select
-                            value={value}
-                            onChange={(e) => setValue(e.target.value)}
-                            sx={{ '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' } }}
-                        >
-                            {status.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                    </Grid>
-                </Grid>
-                <MainCard sx={{ mt: 1.75 }}>
-                    <Stack spacing={1.5} sx={{ mb: -12 }}>
-                        <Typography variant="h6" color="secondary">
-                            Net Profit
-                        </Typography>
-                        <Typography variant="h4">$1560</Typography>
-                    </Stack>
-                    <SalesColumnChart />
-                </MainCard>
-            </Grid>
-            <Grid item xs={12} md={5} lg={4}>
-                <Grid container alignItems="center" justifyContent="space-between">
-                    <Grid item>
-                        <Typography variant="h5">Transaction History</Typography>
-                    </Grid>
-                    <Grid item />
-                </Grid>
-                <MainCard sx={{ mt: 2 }} content={false}>
-                    <List
-                        component="nav"
-                        sx={{
-                            px: 0,
-                            py: 0,
-                            '& .MuiListItemButton-root': {
-                                py: 1.5,
-                                '& .MuiAvatar-root': avatarSX,
-                                '& .MuiListItemSecondaryAction-root': { ...actionSX, position: 'relative' }
-                            }
-                        }}
-                    >
-                        <ListItemButton divider>
-                            <ListItemAvatar>
-                                <Avatar
-                                    sx={{
-                                        color: 'success.main',
-                                        bgcolor: 'success.lighter'
+        <Fragment>
+            <h1>Listado de Entornos</h1>
+            <Card
+                sx={{
+                    minWidth: 300,
+                    border: '1px solid rgba(211,211,211,0.6)'
+                }}
+            >
+                <CardHeader
+                    title="LANPROVA OPTIMIZADO BETA"
+                    avatar={<Avatar>L</Avatar>}
+                    action={
+                        <IconButton onClick={() => setOpen(!open)} aria-label="expand" size="small">
+                            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                        </IconButton>
+                    }
+                ></CardHeader>
+                <div
+                    style={{
+                        backgroundColor: 'rgba(211,211,211,0.4)'
+                    }}
+                >
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <CardContent>
+                            <Box sx={{ m: '1em', width: '100%' }}>
+                                <OutlinedInput
+                                    sx={{ with: '200px' }}
+                                    size="large"
+                                    id="header-search"
+                                    startAdornment={
+                                        <InputAdornment position="start" sx={{ mr: -0.5 }}>
+                                            <SearchOutlined />
+                                        </InputAdornment>
+                                    }
+                                    aria-describedby="header-search-text"
+                                    inputProps={{
+                                        'aria-label': 'weight'
                                     }}
-                                >
-                                    <GiftOutlined />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={<Typography variant="subtitle1">Order #002434</Typography>} secondary="Today, 2:00 AM" />
-                            <ListItemSecondaryAction>
-                                <Stack alignItems="flex-end">
-                                    <Typography variant="subtitle1" noWrap>
-                                        + $1,430
-                                    </Typography>
-                                    <Typography variant="h6" color="secondary" noWrap>
-                                        78%
-                                    </Typography>
-                                </Stack>
-                            </ListItemSecondaryAction>
-                        </ListItemButton>
-                        <ListItemButton divider>
-                            <ListItemAvatar>
-                                <Avatar
-                                    sx={{
-                                        color: 'primary.main',
-                                        bgcolor: 'primary.lighter'
+                                    placeholder="Test"
+                                />
+                            </Box>
+                            <Box sx={{ height: 800, width: '100%' }}>
+                                <DataGrid
+                                    rows={rows}
+                                    columns={columns}
+                                    onRowClick={(e) => navigate('test-dashboard')}
+                                    initialState={{
+                                        pagination: {
+                                            paginationModel: {
+                                                pageSize: 10
+                                            }
+                                        }
                                     }}
-                                >
-                                    <MessageOutlined />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={<Typography variant="subtitle1">Order #984947</Typography>}
-                                secondary="5 August, 1:45 PM"
-                            />
-                            <ListItemSecondaryAction>
-                                <Stack alignItems="flex-end">
-                                    <Typography variant="subtitle1" noWrap>
-                                        + $302
-                                    </Typography>
-                                    <Typography variant="h6" color="secondary" noWrap>
-                                        8%
-                                    </Typography>
-                                </Stack>
-                            </ListItemSecondaryAction>
-                        </ListItemButton>
-                        <ListItemButton>
-                            <ListItemAvatar>
-                                <Avatar
-                                    sx={{
-                                        color: 'error.main',
-                                        bgcolor: 'error.lighter'
-                                    }}
-                                >
-                                    <SettingOutlined />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={<Typography variant="subtitle1">Order #988784</Typography>} secondary="7 hours ago" />
-                            <ListItemSecondaryAction>
-                                <Stack alignItems="flex-end">
-                                    <Typography variant="subtitle1" noWrap>
-                                        + $682
-                                    </Typography>
-                                    <Typography variant="h6" color="secondary" noWrap>
-                                        16%
-                                    </Typography>
-                                </Stack>
-                            </ListItemSecondaryAction>
-                        </ListItemButton>
-                    </List>
-                </MainCard>
-                <MainCard sx={{ mt: 2 }}>
-                    <Stack spacing={3}>
-                        <Grid container justifyContent="space-between" alignItems="center">
-                            <Grid item>
-                                <Stack>
-                                    <Typography variant="h5" noWrap>
-                                        Help & Support Chat
-                                    </Typography>
-                                    <Typography variant="caption" color="secondary" noWrap>
-                                        Typical replay within 5 min
-                                    </Typography>
-                                </Stack>
-                            </Grid>
-                            <Grid item>
-                                <AvatarGroup sx={{ '& .MuiAvatar-root': { width: 32, height: 32 } }}>
-                                    <Avatar alt="Remy Sharp" src={avatar1} />
-                                    <Avatar alt="Travis Howard" src={avatar2} />
-                                    <Avatar alt="Cindy Baker" src={avatar3} />
-                                    <Avatar alt="Agnes Walker" src={avatar4} />
-                                </AvatarGroup>
-                            </Grid>
-                        </Grid>
-                        <Button size="small" variant="contained" sx={{ textTransform: 'capitalize' }}>
-                            Need Help?
-                        </Button>
-                    </Stack>
-                </MainCard>
-            </Grid>
-        </Grid>
+                                    pageSizeOptions={[10]}
+                                    //checkboxSelection
+                                    disableRowSelectionOnClick
+                                />
+                            </Box>
+                        </CardContent>
+                    </Collapse>
+                </div>
+            </Card>
+        </Fragment>
     );
 };
 
