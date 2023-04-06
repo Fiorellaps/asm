@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/asm-smart/static/css/main.e1f2bb6b.css",
+    "main.js": "/asm-smart/static/js/main.8f366c09.js",
+    "static/js/243.2eabae3f.chunk.js": "/asm-smart/static/js/243.2eabae3f.chunk.js",
+    "static/js/180.6f21f736.chunk.js": "/asm-smart/static/js/180.6f21f736.chunk.js",
+    "static/js/119.3874c934.chunk.js": "/asm-smart/static/js/119.3874c934.chunk.js",
+    "static/js/97.6b1bf14e.chunk.js": "/asm-smart/static/js/97.6b1bf14e.chunk.js",
+    "static/js/525.f744476c.chunk.js": "/asm-smart/static/js/525.f744476c.chunk.js",
+    "static/js/893.35dc6462.chunk.js": "/asm-smart/static/js/893.35dc6462.chunk.js",
+    "static/js/165.c44171b8.chunk.js": "/asm-smart/static/js/165.c44171b8.chunk.js",
+    "static/js/346.273943c9.chunk.js": "/asm-smart/static/js/346.273943c9.chunk.js",
+    "static/js/819.bd959f52.chunk.js": "/asm-smart/static/js/819.bd959f52.chunk.js",
+    "static/js/522.3e90a576.chunk.js": "/asm-smart/static/js/522.3e90a576.chunk.js",
+    "static/js/379.e59ada83.chunk.js": "/asm-smart/static/js/379.e59ada83.chunk.js",
+    "static/js/803.bac7c2fc.chunk.js": "/asm-smart/static/js/803.bac7c2fc.chunk.js",
+    "static/js/601.e6bee45d.chunk.js": "/asm-smart/static/js/601.e6bee45d.chunk.js",
+    "static/js/437.d2fd8e39.chunk.js": "/asm-smart/static/js/437.d2fd8e39.chunk.js",
+    "static/js/775.2081f42f.chunk.js": "/asm-smart/static/js/775.2081f42f.chunk.js",
+    "static/js/619.11604446.chunk.js": "/asm-smart/static/js/619.11604446.chunk.js",
+    "static/media/avatar-1.png": "/asm-smart/static/media/avatar-1.26a8e4aa919feddfb9d8.png",
+    "static/media/logo.png": "/asm-smart/static/media/logo.d7a6433d39bbb0dc1100.png",
+    "index.html": "/asm-smart/index.html",
+    "static/media/google.svg": "/asm-smart/static/media/google.a025da87054139fc16b3b9b7ed0a2724.svg",
+    "static/media/twitter.svg": "/asm-smart/static/media/twitter.3e49f64208e00f377e9c3dbeaed797ce.svg",
+    "static/media/facebook.svg": "/asm-smart/static/media/facebook.eb4c069b746811e7b3a7ddf099989a69.svg"
+  },
+  "entrypoints": [
+    "static/css/main.e1f2bb6b.css",
+    "static/js/main.8f366c09.js"
+  ]
+}
