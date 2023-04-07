@@ -22,14 +22,14 @@ const Header = ({ open, handleDrawerToggle }) => {
 
     // common header
     const mainHeader = (
-        <Toolbar>
+        <Toolbar sx={{ bgcolor: '#29292A' }}>
             <IconButton
                 disableRipple
                 aria-label="open drawer"
                 onClick={handleDrawerToggle}
                 edge="start"
                 color="secondary"
-                sx={{ color: 'text.primary', bgcolor: open ? iconBackColorOpen : iconBackColor, ml: { xs: 0, lg: -2 } }}
+                sx={{ color: '#AA3939', bgcolor: open ? iconBackColorOpen : iconBackColor, ml: { xs: 0, lg: -2 } }}
             >
                 {!open ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </IconButton>

@@ -15,8 +15,11 @@ import {
     MenuItem,
     Stack,
     TextField,
-    Typography
+    Typography,
+    Tooltip,
+    Chip
 } from '@mui/material';
+import { RiseOutlined, FallOutlined } from '@ant-design/icons';
 
 // project import
 import OrdersTable from './OrdersTable';
@@ -28,7 +31,7 @@ import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 
 // assets
-import { GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';
+import { LoginOutlined, MobileOutlined, SettingOutlined } from '@ant-design/icons';
 import avatar1 from 'assets/images/users/avatar-1.png';
 import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
@@ -52,28 +55,43 @@ const actionSX = {
 };
 
 // sales report status
-const status = [
+
+const selectorOptions = [
     {
-        value: 'today',
-        label: 'Today'
+        value: 'hoy',
+        label: 'Esta semana'
     },
     {
-        value: 'month',
-        label: 'This Month'
+        value: 'mes',
+        label: 'Este mes'
     },
     {
         value: 'year',
-        label: 'This Year'
+        label: 'Este año'
+    }
+];
+const status = [
+    {
+        value: 'hoy',
+        label: 'Hoy'
+    },
+    {
+        value: 'mes',
+        label: 'Este mes'
+    },
+    {
+        value: 'year',
+        label: 'Este año'
     }
 ];
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const TestDashboardDefault = () => {
-    const [value, setValue] = useState('today');
-    const [slot, setSlot] = useState('week');
+    const [value, setValue] = useState('hoy');
+    const [slot, setSlot] = useState('semana');
     const test_data = {
-        time: 10.8 + 's',
+        time: 89.3 + 's',
         time_percentage: 1.0,
         time_diference: 1 + 's',
         availability: '98' + '%',
@@ -132,24 +150,38 @@ const TestDashboardDefault = () => {
                         <Typography variant="h5">Tiempos de ejecución</Typography>
                     </Grid>
                     <Grid item>
-                        <Stack direction="row" alignItems="center" spacing={0}>
+                        <TextField
+                            id="standard-select-currency"
+                            size="small"
+                            select
+                            value={value}
+                            onChange={(e) => setSlot('mes')}
+                            sx={{ '& .MuiInputBase-input': { py: 1.5, fontSize: '0.875rem' } }}
+                        >
+                            {selectorOptions.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                        {/*<Stack direction="row" alignItems="center" spacing={0}>
                             <Button
                                 size="small"
-                                onClick={() => setSlot('month')}
-                                color={slot === 'month' ? 'primary' : 'secondary'}
-                                variant={slot === 'month' ? 'outlined' : 'text'}
+                                onClick={() => setSlot('mes')}
+                                color={slot === 'mes' ? 'primary' : 'secondary'}
+                                variant={slot === 'mes' ? 'outlined' : 'text'}
                             >
-                                Month
+                                Mes
                             </Button>
                             <Button
                                 size="small"
-                                onClick={() => setSlot('week')}
-                                color={slot === 'week' ? 'primary' : 'secondary'}
-                                variant={slot === 'week' ? 'outlined' : 'text'}
+                                onClick={() => setSlot('semana')}
+                                color={slot === 'semana' ? 'primary' : 'secondary'}
+                                variant={slot === 'semana' ? 'outlined' : 'text'}
                             >
-                                Week
+                                Semana
                             </Button>
-                        </Stack>
+    </Stack>*/}
                     </Grid>
                 </Grid>
                 <MainCard content={false} sx={{ mt: 1.5 }}>
@@ -161,7 +193,7 @@ const TestDashboardDefault = () => {
             <Grid item xs={12} md={5} lg={4}>
                 <Grid container alignItems="center" justifyContent="space-between">
                     <Grid item>
-                        <Typography variant="h5">Evolución de tiempos</Typography>
+                        <Typography variant="h5">Evolución de disponibilidad</Typography>
                     </Grid>
                     <Grid item />
                 </Grid>
@@ -169,9 +201,9 @@ const TestDashboardDefault = () => {
                     <Box sx={{ p: 3, pb: 0 }}>
                         <Stack spacing={2}>
                             <Typography variant="h6" color="textSecondary">
-                                This Week Statistics
+                                La disponibilidad media de esta semana
                             </Typography>
-                            <Typography variant="h3">$7,650</Typography>
+                            <Typography variant="h3">98%</Typography>
                         </Stack>
                     </Box>
                     <MonthlyBarChart />
@@ -182,7 +214,7 @@ const TestDashboardDefault = () => {
             <Grid item xs={12} md={7} lg={8}>
                 <Grid container alignItems="center" justifyContent="space-between">
                     <Grid item>
-                        <Typography variant="h5">Recent Orders</Typography>
+                        <Typography variant="h5">Detalle de las ejecuciones</Typography>
                     </Grid>
                     <Grid item />
                 </Grid>
@@ -193,23 +225,27 @@ const TestDashboardDefault = () => {
             <Grid item xs={12} md={5} lg={4}>
                 <Grid container alignItems="center" justifyContent="space-between">
                     <Grid item>
-                        <Typography variant="h5">Analytics Report</Typography>
+                        <Typography variant="h5">Disponibilidad por paso</Typography>
                     </Grid>
                     <Grid item />
                 </Grid>
                 <MainCard sx={{ mt: 2 }} content={false}>
                     <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
-                        <ListItemButton divider>
-                            <ListItemText primary="Company Finance Growth" />
-                            <Typography variant="h5">+45.14%</Typography>
-                        </ListItemButton>
-                        <ListItemButton divider>
-                            <ListItemText primary="Company Expenses Ratio" />
-                            <Typography variant="h5">0.58%</Typography>
-                        </ListItemButton>
+                        <Tooltip title="Descripción del paso 1" placement="right" arrow>
+                            <ListItemButton divider>
+                                <ListItemText primary="Paso 1" />
+                                <Typography variant="h5">100%</Typography>
+                            </ListItemButton>
+                        </Tooltip>
+                        <Tooltip title="Descripción del paso 2" placement="right" arrow>
+                            <ListItemButton sx={{ bgcolor: '#FF8886' }} divider>
+                                <ListItemText primary="Paso 2" />
+                                <Typography variant="h5">90.5%</Typography>
+                            </ListItemButton>
+                        </Tooltip>
                         <ListItemButton>
-                            <ListItemText primary="Business Risk Cases" />
-                            <Typography variant="h5">Low</Typography>
+                            <ListItemText primary="Paso 3" />
+                            <Typography variant="h5">100%</Typography>
                         </ListItemButton>
                     </List>
                     <ReportAreaChart />
@@ -220,31 +256,50 @@ const TestDashboardDefault = () => {
             <Grid item xs={12} md={7} lg={8}>
                 <Grid container alignItems="center" justifyContent="space-between">
                     <Grid item>
-                        <Typography variant="h5">Sales Report</Typography>
+                        <Typography variant="h5">Predicción de disponibilidad</Typography>
                     </Grid>
                     <Grid item>
-                        <TextField
-                            id="standard-select-currency"
-                            size="small"
-                            select
-                            value={value}
-                            onChange={(e) => setValue(e.target.value)}
-                            sx={{ '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' } }}
-                        >
-                            {status.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                        <Stack direction="row" alignItems="center" spacing={0}>
+                            <Button
+                                size="small"
+                                onClick={() => ''}
+                                color={slot === 'mes' ? 'primary' : 'secondary'}
+                                variant={slot === 'mes' ? 'outlined' : 'text'}
+                            >
+                                Mes
+                            </Button>
+                            <Button
+                                size="small"
+                                onClick={() => ''}
+                                color={slot === 'semana' ? 'primary' : 'secondary'}
+                                variant={slot === 'semana' ? 'outlined' : 'text'}
+                            >
+                                Semana
+                            </Button>
+                        </Stack>
+                        {/*
+                            <TextField
+                                id="standard-select-currency"
+                                size="small"
+                                select
+                                value={value}
+                                onChange={(e) => setValue(e.target.value)}
+                                sx={{ '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' } }}
+                            >
+                                {status.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>*/}
                     </Grid>
                 </Grid>
                 <MainCard sx={{ mt: 1.75 }}>
                     <Stack spacing={1.5} sx={{ mb: -12 }}>
                         <Typography variant="h6" color="secondary">
-                            Net Profit
+                            Porcentaje de disponibilidad
                         </Typography>
-                        <Typography variant="h4">$1560</Typography>
+                        <Typography variant="h4">97%</Typography>
                     </Stack>
                     <SalesColumnChart />
                 </MainCard>
@@ -252,7 +307,7 @@ const TestDashboardDefault = () => {
             <Grid item xs={12} md={5} lg={4}>
                 <Grid container alignItems="center" justifyContent="space-between">
                     <Grid item>
-                        <Typography variant="h5">Transaction History</Typography>
+                        <Typography variant="h5">Detección de errores</Typography>
                     </Grid>
                     <Grid item />
                 </Grid>
@@ -277,17 +332,82 @@ const TestDashboardDefault = () => {
                                         bgcolor: 'success.lighter'
                                     }}
                                 >
-                                    <GiftOutlined />
+                                    <LoginOutlined />
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={<Typography variant="subtitle1">Order #002434</Typography>} secondary="Today, 2:00 AM" />
+                            <ListItemText primary={<Typography variant="subtitle1">Login</Typography>} secondary="Total: 7" />
+                            <ListItemSecondaryAction>
+                                <Stack alignItems="flex-end">
+                                    <Grid>
+                                        <Chip
+                                            variant="combined"
+                                            color={'error'}
+                                            icon={
+                                                <>
+                                                    <RiseOutlined style={{ fontSize: '0.75rem', color: 'inherit' }} />
+                                                </>
+                                            }
+                                            label={`+5`}
+                                            sx={{ ml: 1.25, pl: 1 }}
+                                            size="small"
+                                        />
+                                    </Grid>
+                                </Stack>
+                            </ListItemSecondaryAction>
+                        </ListItemButton>
+                        <ListItemButton divider>
+                            <ListItemAvatar>
+                                <Avatar
+                                    sx={{
+                                        color: 'primary.main',
+                                        bgcolor: 'primary.lighter'
+                                    }}
+                                >
+                                    <MobileOutlined />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary={<Typography variant="subtitle1">Aplicación Móvil</Typography>} secondary="Total: 2" />
+                            <ListItemSecondaryAction>
+                                <Stack alignItems="flex-end">
+                                    <Grid>
+                                        <Chip
+                                            variant="combined"
+                                            color={'error'}
+                                            icon={
+                                                <>
+                                                    <RiseOutlined style={{ fontSize: '0.75rem', color: 'inherit' }} />
+                                                </>
+                                            }
+                                            label={`+2`}
+                                            sx={{ ml: 1.25, pl: 1 }}
+                                            size="small"
+                                        />
+                                    </Grid>
+                                </Stack>
+                            </ListItemSecondaryAction>
+                        </ListItemButton>
+                        {/*<ListItemButton divider>
+                            <ListItemAvatar>
+                                <Avatar
+                                    sx={{
+                                        color: 'primary.main',
+                                        bgcolor: 'primary.lighter'
+                                    }}
+                                >
+                                    <MobileOutlined />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={<Typography variant="subtitle1">Order #984947</Typography>}
+                                secondary="5 August, 1:45 PM"
+                            />
                             <ListItemSecondaryAction>
                                 <Stack alignItems="flex-end">
                                     <Typography variant="subtitle1" noWrap>
-                                        + $1,430
+                                        + $302
                                     </Typography>
                                     <Typography variant="h6" color="secondary" noWrap>
-                                        78%
+                                        8%
                                     </Typography>
                                 </Stack>
                             </ListItemSecondaryAction>
@@ -300,7 +420,33 @@ const TestDashboardDefault = () => {
                                         bgcolor: 'primary.lighter'
                                     }}
                                 >
-                                    <MessageOutlined />
+                                    <MobileOutlined />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={<Typography variant="subtitle1">Order #984947</Typography>}
+                                secondary="5 August, 1:45 PM"
+                            />
+                            <ListItemSecondaryAction>
+                                <Stack alignItems="flex-end">
+                                    <Typography variant="subtitle1" noWrap>
+                                        + $302
+                                    </Typography>
+                                    <Typography variant="h6" color="secondary" noWrap>
+                                        8%
+                                    </Typography>
+                                </Stack>
+                            </ListItemSecondaryAction>
+                        </ListItemButton>
+                        <ListItemButton divider>
+                            <ListItemAvatar>
+                                <Avatar
+                                    sx={{
+                                        color: 'primary.main',
+                                        bgcolor: 'primary.lighter'
+                                    }}
+                                >
+                                    <MobileOutlined />
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText
@@ -341,9 +487,10 @@ const TestDashboardDefault = () => {
                                 </Stack>
                             </ListItemSecondaryAction>
                         </ListItemButton>
+                        */}
                     </List>
                 </MainCard>
-                <MainCard sx={{ mt: 2 }}>
+                {/*<MainCard sx={{ mt: 2 }}>
                     <Stack spacing={3}>
                         <Grid container justifyContent="space-between" alignItems="center">
                             <Grid item>
@@ -369,7 +516,7 @@ const TestDashboardDefault = () => {
                             Need Help?
                         </Button>
                     </Stack>
-                </MainCard>
+                </MainCard>*/}
             </Grid>
         </Grid>
     );

@@ -207,7 +207,7 @@ const DashboardDefault = () => {
                 ></CardHeader>
                 <div
                     style={{
-                        backgroundColor: 'rgba(211,211,211,0.4)'
+                        backgroundColor: '#F2F2F3'
                     }}
                 >
                     <Collapse in={open} timeout="auto" unmountOnExit>

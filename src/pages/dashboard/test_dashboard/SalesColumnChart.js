@@ -30,7 +30,7 @@ const columnChartOptions = {
         colors: ['transparent']
     },
     xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+        categories: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom']
     },
     yaxis: {
         title: {
@@ -93,12 +93,12 @@ const SalesColumnChart = () => {
 
     const [series] = useState([
         {
-            name: 'Net Profit',
-            data: [180, 90, 135, 114, 120, 145]
+            name: 'Predicción',
+            data: [180, 90, 135, 114, 120, 145, 99]
         },
         {
-            name: 'Revenue',
-            data: [120, 45, 78, 150, 168, 99]
+            name: 'Realidad',
+            data: [120, 45, 78, 150, 168, 99, 99]
         }
     ]);
 

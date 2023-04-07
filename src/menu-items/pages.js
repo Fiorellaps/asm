@@ -16,15 +16,15 @@ const pages = {
     children: [
         {
             id: 'tags',
-            title: 'Añadir tags',
+            title: 'Gestionar Tags',
             type: 'item',
             url: '/',
-            icon: icons.LoginOutlined,
+            icon: icons.ProfileOutlined,
             target: true
         },
         {
             id: 'entornos',
-            title: 'Añadir Entornos',
+            title: 'Gestionar Entornos',
             type: 'item',
             url: '/',
             icon: icons.ProfileOutlined,
@@ -32,7 +32,7 @@ const pages = {
         },
         {
             id: 'test',
-            title: 'Añadir Tests',
+            title: 'Gestionar Tests',
             type: 'item',
             url: '/',
             icon: icons.ProfileOutlined,
