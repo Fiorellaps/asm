@@ -113,7 +113,11 @@ const TestDashboardDefault = () => {
                 <Button variant="contained">
                     <BlobProvider document={<Report />}>
                         {({ url, loading, error }) => (
-                            <a href={url} style={{ textDecoration: 'none' }} download="informe_LANPROVA_OPTIMIZADO_BETA_HBLO.pdf">
+                            <a
+                                href={url}
+                                style={{ textDecoration: 'none', color: 'white' }}
+                                download="informe_LANPROVA_OPTIMIZADO_BETA_HBLO.pdf"
+                            >
                                 Descargar informe mensual
                             </a>
                         )}
