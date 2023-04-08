@@ -11,21 +11,20 @@ import NumberFormat from 'react-number-format';
 // project import
 import Dot from 'components/@extended/Dot';
 
-function createData(trackingNo, name, fat, carbs, protein) {
-    return { trackingNo, name, fat, carbs, protein };
+function createData(hora, tiempo, disponibilidad, errores, muestras) {
+    return { hora, tiempo, disponibilidad, errores, muestras };
 }
 
 const rows = [
-    createData(84564564, 'Camera Lens', 40, 2, 40570),
-    createData(98764564, 'Laptop', 300, 0, 180139),
-    createData(98756325, 'Mobile', 355, 1, 90989),
-    createData(98652366, 'Handset', 50, 1, 10239),
-    createData(13286564, 'Computer Accessories', 100, 1, 83348),
-    createData(86739658, 'TV', 99, 0, 410780),
-    createData(13256498, 'Keyboard', 125, 2, 70999),
-    createData(98753263, 'Mouse', 89, 2, 10570),
-    createData(98753275, 'Desktop', 185, 1, 98063),
-    createData(98753291, 'Chair', 100, 0, 14001)
+    createData('00:00', '85.8s', '100.00%', 0, 4),
+    createData('01:00', '86.8s', '100.00%', 0, 4),
+    createData('02:00', '83.3s', '95.00%', 1, 5),
+    createData('03:00', '85.8s', '100.00%', 0, 4),
+    createData('04:00', '80.5s', '89.05%', 2, 6),
+    createData('05:00', '85.8s', '100.00%', 0, 4),
+    createData('06:00', '85.8s', '100.00%', 0, 4),
+    createData('07:00', '85.8s', '100.00%', 0, 4),
+    createData('08:00', '85.8s', '100.00%', 0, 4)
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -58,35 +57,34 @@ function stableSort(array, comparator) {
 
 const headCells = [
     {
-        id: 'trackingNo',
+        id: 'hora',
         align: 'left',
         disablePadding: false,
-        label: 'Tracking No.'
+        label: 'Hora'
     },
     {
-        id: 'name',
+        id: 'tiempo',
         align: 'left',
         disablePadding: true,
-        label: 'Product Name'
+        label: 'Tiempo'
     },
     {
-        id: 'fat',
+        id: 'disponibilidad',
         align: 'right',
         disablePadding: false,
-        label: 'Total Order'
+        label: 'Disponibilidad'
     },
     {
-        id: 'carbs',
+        id: 'errores',
         align: 'left',
         disablePadding: false,
-
-        label: 'Status'
+        label: 'Número de errores'
     },
     {
-        id: 'protein',
+        id: 'muestras',
         align: 'right',
         disablePadding: false,
-        label: 'Total Amount'
+        label: 'Muestras totales'
     }
 ];
 
@@ -120,24 +118,15 @@ OrderTableHead.propTypes = {
 
 const OrderStatus = ({ status }) => {
     let color;
-    let title;
+    let title = status;
 
     switch (status) {
         case 0:
-            color = 'warning';
-            title = 'Pending';
-            break;
-        case 1:
             color = 'success';
-            title = 'Approved';
             break;
-        case 2:
-            color = 'error';
-            title = 'Rejected';
-            break;
+
         default:
-            color = 'primary';
-            title = 'None';
+            color = 'error';
     }
 
     return (
@@ -156,10 +145,10 @@ OrderStatus.propTypes = {
 
 export default function OrderTable() {
     const [order] = useState('asc');
-    const [orderBy] = useState('trackingNo');
+    const [orderBy] = useState('hora');
     const [selected] = useState([]);
 
-    const isSelected = (trackingNo) => selected.indexOf(trackingNo) !== -1;
+    const isSelected = (hora) => selected.indexOf(hora) !== -1;
 
     return (
         <Box>
@@ -187,7 +176,7 @@ export default function OrderTable() {
                     <OrderTableHead order={order} orderBy={orderBy} />
                     <TableBody>
                         {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
-                            const isItemSelected = isSelected(row.trackingNo);
+                            const isItemSelected = isSelected(row.hora);
                             const labelId = `enhanced-table-checkbox-${index}`;
 
                             return (
@@ -197,21 +186,21 @@ export default function OrderTable() {
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     aria-checked={isItemSelected}
                                     tabIndex={-1}
-                                    key={row.trackingNo}
+                                    key={row.hora}
                                     selected={isItemSelected}
                                 >
                                     <TableCell component="th" id={labelId} scope="row" align="left">
                                         <Link color="secondary" component={RouterLink} to="">
-                                            {row.trackingNo}
+                                            {row.hora}
                                         </Link>
                                     </TableCell>
-                                    <TableCell align="left">{row.name}</TableCell>
-                                    <TableCell align="right">{row.fat}</TableCell>
+                                    <TableCell align="left">{row.tiempo}</TableCell>
+                                    <TableCell align="right">{row.disponibilidad}</TableCell>
                                     <TableCell align="left">
-                                        <OrderStatus status={row.carbs} />
+                                        <OrderStatus status={row.errores} />
                                     </TableCell>
                                     <TableCell align="right">
-                                        <NumberFormat value={row.protein} displayType="text" thousandSeparator prefix="$" />
+                                        <NumberFormat value={row.muestras} displayType="text" thousandSeparator prefix="" />
                                     </TableCell>
                                 </TableRow>
                             );
