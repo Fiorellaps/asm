@@ -2,6 +2,9 @@
 
 [<img align="left" src="/src/components/Logo/logo-fondo.png" alt="español" width="170"/>](https://nextret.net/)
 
+<br>
+<br>
+
 ## Componentes
 
 -   Monitorización de ejecuciones
