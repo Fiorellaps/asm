@@ -20,6 +20,7 @@ import {
     Chip
 } from '@mui/material';
 import { RiseOutlined, FallOutlined } from '@ant-design/icons';
+import { BlobProvider } from '@react-pdf/renderer';
 
 // project import
 import OrdersTable from './OrdersTable';
@@ -29,6 +30,7 @@ import ReportAreaChart from './ReportAreaChart';
 import SalesColumnChart from './SalesColumnChart';
 import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
+import Report from '../pdf_report/report';
 
 // assets
 import { LoginOutlined, MobileOutlined, SettingOutlined } from '@ant-design/icons';
@@ -108,6 +110,15 @@ const TestDashboardDefault = () => {
             {/* row 1 */}
             <Grid item xs={12} sx={{ mb: -2.25 }}>
                 <Typography variant="h5">Dashboard del Test LANPROVA_OPTIMIZADO_BETA_HBLO-26_Extracte_Targeta_Firefox</Typography>
+                <Button variant="contained">
+                    <BlobProvider document={<Report />}>
+                        {({ url, loading, error }) => (
+                            <a href={url} style={{ textDecoration: 'none' }} download="informe_LANPROVA_OPTIMIZADO_BETA_HBLO.pdf">
+                                Descargar informe mensual
+                            </a>
+                        )}
+                    </BlobProvider>
+                </Button>
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
                 <AnalyticEcommerce

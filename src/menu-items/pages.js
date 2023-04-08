@@ -18,7 +18,7 @@ const pages = {
             id: 'tags',
             title: 'Gestionar Tags',
             type: 'item',
-            url: '/',
+            url: '/gestion-tags',
             icon: icons.ProfileOutlined,
             target: true
         },
@@ -26,7 +26,7 @@ const pages = {
             id: 'entornos',
             title: 'Gestionar Entornos',
             type: 'item',
-            url: '/',
+            url: '/gestion-entornos',
             icon: icons.ProfileOutlined,
             target: true
         },
@@ -34,7 +34,7 @@ const pages = {
             id: 'test',
             title: 'Gestionar Tests',
             type: 'item',
-            url: '/',
+            url: '/gestion-tests',
             icon: icons.ProfileOutlined,
             target: true
         }

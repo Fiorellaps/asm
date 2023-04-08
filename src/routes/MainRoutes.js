@@ -9,6 +9,9 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 const TestDashboardDefault = Loadable(lazy(() => import('pages/dashboard/test_dashboard')));
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
+const GestionTags = Loadable(lazy(() => import('pages/extra-pages/GestionTags')));
+const GestionTest = Loadable(lazy(() => import('pages/extra-pages/GestionTest')));
+const GestionEntorno = Loadable(lazy(() => import('pages/extra-pages/GestionEntorno')));
 
 // render - utilities
 const Typography = Loadable(lazy(() => import('pages/components-overview/Typography')));
@@ -34,7 +37,7 @@ const MainRoutes = {
             path: 'dashboard',
             children: [
                 {
-                    path: 'default',
+                    path: 'test-dashboard',
                     element: <DashboardDefault />
                 }
             ]
@@ -42,6 +45,18 @@ const MainRoutes = {
         {
             path: 'test-dashboard',
             element: <TestDashboardDefault />
+        },
+        {
+            path: 'gestion-tags',
+            element: <GestionTags />
+        },
+        {
+            path: 'gestion-entornos',
+            element: <GestionEntorno />
+        },
+        {
+            path: 'gestion-tests',
+            element: <GestionTest />
         },
         {
             path: 'shadow',

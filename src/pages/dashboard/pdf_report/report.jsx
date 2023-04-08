@@ -1,7 +1,10 @@
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import BarChart from './bar_chart_component';
+import { Image, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+//import BarChart from './bar_chart_component';
 // Create styles
+
+import Logo from './logo.png';
+
 const styles = StyleSheet.create({
     page: {
         flexDirection: 'row',
@@ -25,12 +28,14 @@ const Report = () => (
     <Document>
         <Page size="A4" style={styles.page}>
             <View style={styles.section}>
+                <Image style={{ width: '80px' }} src="https://media.glassdoor.com/sqll/887465/nextret-squarelogo-1567586597192.png" />
                 <Text>Informe mensual del test LANPROVA_OPTIMIZADO_BETA_HBLO-26_Extracte_Targeta_Firefox</Text>
-                <Text>Date: {new Date().toLocaleDateString()}</Text>
+                <Text>Fecha: {new Date().toLocaleDateString()}</Text>
                 <View style={{ marginTop: 10 }}>
                     {data.map((item, index) => (
                         <View key={index} style={{ marginBottom: 10 }}>
                             <Text>{item.title}</Text>
+                            <Text>{item.description}</Text>
                         </View>
                     ))}
                 </View>
